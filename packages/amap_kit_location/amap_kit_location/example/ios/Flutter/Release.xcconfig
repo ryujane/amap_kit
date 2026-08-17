@@ -1,0 +1,5 @@
+#include? "Pods/Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"
+#include "Generated.xcconfig"
+
+// AMapLocationKit 2.12.2 only provides an x86_64 simulator slice.
+EXCLUDED_ARCHS[sdk=iphonesimulator*]=arm64

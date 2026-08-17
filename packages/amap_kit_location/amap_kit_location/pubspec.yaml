@@ -1,0 +1,27 @@
+name: amap_kit_location
+description: AMap foreground location plugin for Flutter.
+version: 0.0.1
+repository: https://github.com/ryujane/amap_kit
+environment:
+  sdk: ^3.10.0
+  flutter: '>=3.38.0'
+resolution: workspace
+dependencies:
+  amap_kit_core: ^0.0.1
+  amap_kit_location_android: ^0.0.1
+  amap_kit_location_ios: ^0.0.1
+  amap_kit_location_platform_interface: ^0.0.1
+  flutter:
+    sdk: flutter
+dev_dependencies:
+  flutter_lints: ^6.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        default_package: amap_kit_location_android
+      ios:
+        default_package: amap_kit_location_ios

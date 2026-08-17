@@ -1,0 +1,49 @@
+# https://dart.dev/tools/private-files
+# Created by `dart pub`
+.dart_tool/
+.pub/
+.DS_Store
+.idea/
+.idea/libraries
+build
+
+.vscode/
+*.iml
+
+# iOS and macOS dependencies
+.build/
+Podfile.lock
+Pods/
+.swiftpm/
+.symlinks/
+
+# Generated files on example apps
+flutter_export_environment.sh
+.flutter-plugins*
+local.properties
+keystore.properties
+**/Flutter/Generated.xcconfig
+**/Flutter/App.framework/
+**/Flutter/ephemeral/
+**/Flutter/Flutter.podspec
+**/Flutter/Flutter.framework/
+**/Flutter/flutter_assets/
+ServiceDefinitions.json
+xcuserdata/
+
+# Gradle
+**/gradle-wrapper.jar
+.gradle/
+gradlew
+gradlew.bat
+
+.project
+.classpath
+.settings
+
+generated_plugin_registrant.*
+GeneratedPluginRegistrant.*
+
+.claude
+
+pubspec.lock

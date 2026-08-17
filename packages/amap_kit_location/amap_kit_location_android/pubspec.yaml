@@ -1,0 +1,28 @@
+name: amap_kit_location_android
+description: Android implementation for amap_kit_location.
+version: 0.0.1
+repository: https://github.com/ryujane/amap_kit
+environment:
+  sdk: ^3.10.0
+  flutter: '>=3.38.0'
+resolution: workspace
+dependencies:
+  amap_kit_core: ^0.0.1
+  amap_kit_location_platform_interface: ^0.0.1
+  flutter:
+    sdk: flutter
+  meta: ^1.16.0
+dev_dependencies:
+  flutter_lints: ^6.0.0
+  flutter_test:
+    sdk: flutter
+  pigeon: ^27.3.0
+
+flutter:
+  plugin:
+    implements: amap_kit_location
+    platforms:
+      android:
+        package: com.github.amapkit.location
+        pluginClass: AmapLocationNativePlugin
+        dartPluginClass: AmapLocationAndroid

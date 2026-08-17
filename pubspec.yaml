@@ -1,0 +1,48 @@
+name: amap_kit_workspace
+description: AMap Flutter Kit 的 Pub Workspace 根配置。
+publish_to: none
+
+environment:
+  sdk: ^3.10.0
+
+workspace:
+  - packages/amap_kit_core
+  - packages/amap_kit_map/amap_kit_map
+  - packages/amap_kit_map/amap_kit_map/example
+  - packages/amap_kit_map/amap_kit_map_platform_interface
+  - packages/amap_kit_map/amap_kit_map_android
+  - packages/amap_kit_map/amap_kit_map_ios
+  - packages/amap_kit_location/amap_kit_location
+  - packages/amap_kit_location/amap_kit_location/example
+  - packages/amap_kit_location/amap_kit_location_platform_interface
+  - packages/amap_kit_location/amap_kit_location_android
+  - packages/amap_kit_location/amap_kit_location_ios
+
+dev_dependencies:
+  flutter_lints: ^6.0.0
+  melos: ^8.2.2
+  pigeon: ^27.3.0
+
+melos:
+  repository: https://github.com/ryujane/amap_kit
+  resolution: workspace
+  scripts:
+    gen:pigeon:
+      description: 重新生成所有 Pigeon 平台通道代码。
+      run: |
+        melos run gen:pigeon:map
+        melos run gen:pigeon:location
+    gen:pigeon:map:
+      description: 重新生成地图 Android/iOS 的 Pigeon 代码。
+      exec: dart run pigeon --input pigeons/map_messages.dart
+      packageFilters:
+        scope:
+          - amap_kit_map_android
+          - amap_kit_map_ios
+    gen:pigeon:location:
+      description: 重新生成定位 Android/iOS 的 Pigeon 代码。
+      exec: dart run pigeon --input pigeons/location_messages.dart
+      packageFilters:
+        scope:
+          - amap_kit_location_android
+          - amap_kit_location_ios

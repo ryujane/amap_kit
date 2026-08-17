@@ -1,0 +1,21 @@
+name: amap_kit_core
+description: AMap Flutter Kit 的稳定产品无关模型、事件基类与工具。
+version: 0.0.1
+repository: https://github.com/ryujane/amap_kit
+
+environment:
+  sdk: '^3.10.0'
+  flutter: '>=3.38.0'
+
+resolution: workspace
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  test: ^1.25.6

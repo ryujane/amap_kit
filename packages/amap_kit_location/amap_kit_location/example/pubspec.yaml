@@ -1,0 +1,26 @@
+name: amap_kit_location_example
+description: Demonstrates foreground location with amap_kit_location.
+publish_to: none
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.0
+  flutter: '>=3.38.0'
+resolution: workspace
+
+dependencies:
+  amap_kit_location:
+    path: ..
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  amap_kit_core: ^0.0.1
+  flutter_lints: ^6.0.0
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
