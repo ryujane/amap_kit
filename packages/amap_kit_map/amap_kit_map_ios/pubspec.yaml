@@ -1,6 +1,6 @@
 name: amap_kit_map_ios
 description: IOS implementation for amap_kit_map.
-version: 0.0.1
+version: 0.1.0
 repository: https://github.com/ryujane/amap_kit
 
 environment:
@@ -12,8 +12,8 @@ resolution: workspace
 dependencies:
   flutter:
     sdk: flutter
-  amap_kit_core: ^0.0.1
-  amap_kit_map_platform_interface: ^0.0.1
+  amap_kit_core: ^0.1.0
+  amap_kit_map_platform_interface: ^0.1.0
   stream_transform: ^2.0.0
   meta: ^1.16.0
 

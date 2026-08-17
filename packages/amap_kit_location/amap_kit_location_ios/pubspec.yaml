@@ -1,14 +1,14 @@
 name: amap_kit_location_ios
 description: iOS implementation for amap_kit_location.
-version: 0.0.1
+version: 0.1.0
 repository: https://github.com/ryujane/amap_kit
 environment:
   sdk: ^3.10.0
   flutter: '>=3.38.0'
 resolution: workspace
 dependencies:
-  amap_kit_core: ^0.0.1
-  amap_kit_location_platform_interface: ^0.0.1
+  amap_kit_core: ^0.1.0
+  amap_kit_location_platform_interface: ^0.1.0
   flutter:
     sdk: flutter
   meta: ^1.16.0

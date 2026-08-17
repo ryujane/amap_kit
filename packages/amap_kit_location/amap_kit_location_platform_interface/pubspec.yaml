@@ -1,13 +1,13 @@
 name: amap_kit_location_platform_interface
 description: AMap location plugin platform contract.
-version: 0.0.1
+version: 0.1.0
 repository: https://github.com/ryujane/amap_kit
 environment:
   sdk: ^3.10.0
   flutter: '>=3.38.0'
 resolution: workspace
 dependencies:
-  amap_kit_core: ^0.0.1
+  amap_kit_core: ^0.1.0
   flutter:
     sdk: flutter
   plugin_platform_interface: ^2.1.8
