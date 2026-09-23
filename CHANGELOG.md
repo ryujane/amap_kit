@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2026-09-23
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`amap_kit_map_android` - `v0.1.1`](#amap_kit_map_android---v011)
+ - [`amap_kit_map_ios` - `v0.1.1`](#amap_kit_map_ios---v011)
+
+---
+
+#### `amap_kit_map_android` - `v0.1.1`
+
+ - 修复 `AmapMyLocationStyle.icon` 为 `null` 时抛出 `UnimplementedError` 的问题;`null` 图标透传原生端,保持平台 SDK 默认蓝点([#1](https://github.com/ryujane/amap_kit/issues/1))。
+
+#### `amap_kit_map_ios` - `v0.1.1`
+
+ - 修复 `AmapMyLocationStyle.icon` 为 `null` 时抛出 `UnimplementedError` 的问题;`null` 图标透传原生端,保持平台 SDK 默认蓝点([#1](https://github.com/ryujane/amap_kit/issues/1))。
+
 ## 2026-08-17
 
 ### Changes
