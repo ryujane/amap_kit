@@ -79,6 +79,39 @@ packages/
 - 完成前，格式化代码，使用 `flutter_lints` 进行分析，运行相关测试，校验依赖与生成文件新鲜度；必要时更新公开文档、changelog 和版本元数据。
 - 变更包的 CI 应覆盖格式化、分析、单元测试、依赖规则、生成代码新鲜度、原生 SDK 版本校验、Android 编译，以及 CI 可用时的 iOS 编译。根 Workspace 包不得发布。
 
+## 发布流程
+
+发布统一使用仓库工作区内的 Melos（`dart run melos`），不使用全局安装的 `melos` 二进制。版本号、各包与根 `CHANGELOG.md`、`chore(release)` 发布提交与 `<包名>-v<版本>` tag 均由 `melos version` 生成；手动升级版本或手写发布记录属于例外，须说明原因。
+
+前置条件：
+
+- 待发布改动已按 Conventional Commits 规范标题合并到 `main`（`fix` → patch、`feat` → minor、`BREAKING CHANGE` → major）。
+- 本机已执行 `dart pub login` 完成 pub.dev 登录。
+
+步骤：
+
+```bash
+# 1. 自动定级：只升有改动的包及其工作区依赖方，生成各包与根 CHANGELOG，
+#    并创建发布提交与 tag（交互确认）
+dart run melos version
+
+# 2. 推送发布提交与 tag
+git push --follow-tags origin main
+
+# 3. 先干跑校验，再正式发布所有未发布版本
+dart run melos publish --dry-run --yes
+dart run melos publish --no-dry-run --yes
+```
+
+规则与注意：
+
+- 只发布有改动的包及其依赖方，不得让无关产品锁步发布。`melos version` 默认通过 `--dependent-constraints`/`--dependent-versions` 连带升工作区依赖方；确认不需要时加 `--no-dependent-versions` 并说明原因。
+- 发布到 pub.dev 不可撤回；正式发布前必须先通过 `--dry-run` 校验（0 warnings）。
+- 发布后通过 `https://pub.dev/api/packages/<包名>` 确认 `latest.version` 为目标版本。
+- 预发布与转正使用 `--prerelease` / `--graduate`。
+- Melos 的交互确认在非交互终端会被取消（表现为 `CancelledException`）；由 Agent 代跑命令时须检查这一输出。
+- 需要手动定级单个包时使用 `dart run melos version <包名> <patch|minor|major|版本号>`。
+
 ## Flutter 与 Dart 代码规范
 
 - 优先使用简洁、声明式的组合，而非继承。组件保持不可变，并区分组件临时状态与应用状态。
