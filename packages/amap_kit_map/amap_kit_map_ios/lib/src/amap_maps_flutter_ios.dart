@@ -1046,7 +1046,7 @@ PlatformMyLocationStyle? _platformMyLocationStyleFromMyLocationStyle(
     return null;
   }
   return PlatformMyLocationStyle(
-    icon: _platformBitmapFromBitmapDescriptor(style.icon),
+    icon: _platformBitmapOrNullFromBitmapDescriptor(style.icon),
     anchorU: style.anchorU,
     anchorV: style.anchorV,
     radiusFillColor: style.accuracyFillColor,
@@ -1100,8 +1100,16 @@ PlatformMyLocationType? _platformMyLocationTypeFromMyLocationType(
   }
 }
 
-PlatformBitmap _platformBitmapFromBitmapDescriptor(
+PlatformBitmap? _platformBitmapOrNullFromBitmapDescriptor(
   BitmapDescriptor? descriptor,
+) {
+  return descriptor == null
+      ? null
+      : _platformBitmapFromBitmapDescriptor(descriptor);
+}
+
+PlatformBitmap _platformBitmapFromBitmapDescriptor(
+  BitmapDescriptor descriptor,
 ) {
   return switch (descriptor) {
     DefaultMarker() => PlatformBitmap(bitmap: PlatformBitmapDefaultMarker()),
@@ -1141,8 +1149,6 @@ PlatformBitmap _platformBitmapFromBitmapDescriptor(
           height: height,
         ),
       ),
-    // TODO: Handle this case.
-    null => throw UnimplementedError(),
   };
 }
 
