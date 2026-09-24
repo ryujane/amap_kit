@@ -1,6 +1,6 @@
 name: amap_kit_map_android
 description: Android implementation for amap_kit_map.
-version: 0.1.1
+version: 0.1.2
 repository: https://github.com/ryujane/amap_kit
 
 environment:
@@ -11,7 +11,7 @@ resolution: workspace
 
 dependencies:
   amap_kit_core: ^0.1.0
-  amap_kit_map_platform_interface: ^0.1.0
+  amap_kit_map_platform_interface: ^0.1.1
   flutter:
     sdk: flutter
   flutter_plugin_android_lifecycle: ^2.0.35

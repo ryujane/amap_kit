@@ -1,6 +1,6 @@
 name: amap_kit_map
 description: AMap map widget and controller for Flutter.
-version: 0.1.0
+version: 0.1.1
 repository: https://github.com/ryujane/amap_kit
 
 environment:
@@ -11,9 +11,9 @@ resolution: workspace
 
 dependencies:
   amap_kit_core: ^0.1.0
-  amap_kit_map_android: ^0.1.0
-  amap_kit_map_ios: ^0.1.0
-  amap_kit_map_platform_interface: ^0.1.0
+  amap_kit_map_android: ^0.1.2
+  amap_kit_map_ios: ^0.1.2
+  amap_kit_map_platform_interface: ^0.1.1
   flutter:
     sdk: flutter
 
