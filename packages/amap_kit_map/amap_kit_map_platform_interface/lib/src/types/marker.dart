@@ -162,8 +162,8 @@ final class Marker implements MapsObject<Marker> {
   /// 用户点击此标记时调用。
   ///
   /// 回调不参与 [Marker] 的相等性与差分判断，因此只替换回调不会触发原生
-  /// 覆盖物更新。参与聚合的 Marker 不会触发此回调，而是走
-  /// [ClusterManager.onClusterTap]。
+  /// 覆盖物更新。参与聚合但单独显示的 Marker 仍会触发此回调；聚成数字
+  /// 图标时则触发 [ClusterManager.onClusterTap]。
   final VoidCallback? onTap;
 
   /// 用户开始拖动此标记时调用，参数为原生当前位置。

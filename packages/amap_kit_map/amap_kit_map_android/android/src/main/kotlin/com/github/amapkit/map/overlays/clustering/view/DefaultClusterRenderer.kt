@@ -489,7 +489,7 @@ open class DefaultClusterRenderer<T : ClusterItem>(
                             item.zIndex?.let(markerOptions::zIndex)
                         }
                         onBeforeClusterItemRendered(item, markerOptions)
-                        val marker = clusterManager.markerManager.addMarker(markerOptions)
+                        val marker = clusterManager.itemMarkers.addMarker(markerOptions)
                         itemMarkerCache.put(item, marker)
                         MarkerWithPosition(marker).also { markerWithPosition ->
                             animateFrom?.let {

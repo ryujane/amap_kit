@@ -11,8 +11,6 @@ class MarkerManager(
     AMap.OnMarkerDragListener,
     AMap.OnInfoWindowClickListener {
 
-    val defaultCollection by lazy(::createCollection)
-
     override fun registerMapListeners() {
         map.setOnMarkerClickListener(this)
         map.setOnMarkerDragListener(this)
@@ -20,8 +18,6 @@ class MarkerManager(
     }
 
     override fun createCollection() = MarkerCollection(this)
-
-    fun addMarker(options: MarkerOptions) = defaultCollection.addMarker(options)
 
     override fun onMarkerClick(marker: Marker) =
         objectCollections[marker]?.markerClickListener?.onMarkerClick(marker) ?: false
