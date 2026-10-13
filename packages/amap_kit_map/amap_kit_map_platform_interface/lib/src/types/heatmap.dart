@@ -30,7 +30,6 @@ final class WeightedLatLng {
     'weight': weight,
   };
 
-
   @override
   String toString() {
     return '${objectRuntimeType(this, 'WeightedLatLng')}($point, $weight)';
@@ -68,7 +67,6 @@ final class HeatmapGradientColor {
   int get hashCode => Object.hash(color, startPoint);
 }
 
-
 @immutable
 final class HeatmapGradient {
   /// Creates a heatmap gradient with strictly increasing color start points.
@@ -90,6 +88,7 @@ final class HeatmapGradient {
     }
     return true;
   }
+
   Object toJson() {
     final json = <String, Object>{};
 
@@ -99,10 +98,17 @@ final class HeatmapGradient {
       }
     }
 
-    addIfPresent('colors', colors.map((HeatmapGradientColor e) => e.color.toARGB32()).toList());
-    addIfPresent('startPoints', colors.map((HeatmapGradientColor e) => e.startPoint).toList());
+    addIfPresent(
+      'colors',
+      colors.map((HeatmapGradientColor e) => e.color.toARGB32()).toList(),
+    );
+    addIfPresent(
+      'startPoints',
+      colors.map((HeatmapGradientColor e) => e.startPoint).toList(),
+    );
     return json;
   }
+
   @override
   bool operator ==(Object other) =>
       other is HeatmapGradient && listEquals(other.colors, colors);

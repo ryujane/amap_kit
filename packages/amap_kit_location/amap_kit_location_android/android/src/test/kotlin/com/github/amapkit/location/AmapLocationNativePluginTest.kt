@@ -92,7 +92,6 @@ internal class AmapLocationNativePluginTest {
 
   private fun pluginWithAcceptedPrivacyAndExistingClient(): AmapLocationNativePlugin {
     val plugin = AmapLocationNativePlugin()
-    setField(plugin, "privacyConfigured", true)
     setField(plugin, "configuredPrivacyStatus", acceptedPrivacyStatus())
     @Suppress("UNCHECKED_CAST")
     val clients = field(plugin, "clients") as MutableMap<Long, Any>

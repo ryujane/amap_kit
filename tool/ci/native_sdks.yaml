@@ -1,0 +1,5 @@
+# Audited declarations; versions differ across products and platforms.
+"packages/amap_kit_map/amap_kit_map_android/android/build.gradle.kts": "implementation(\"com.amap.api:3dmap-location-search:11.1.001_loc11.1.001_sea9.7.4\")"
+"packages/amap_kit_location/amap_kit_location_android/android/build.gradle.kts": "implementation(\"com.amap.api:location:11.2.100\")"
+"packages/amap_kit_map/amap_kit_map_ios/ios/amap_kit_map_ios.podspec": "s.dependency 'AMap3DMap'"
+"packages/amap_kit_location/amap_kit_location_ios/ios/amap_kit_location_ios.podspec": "s.dependency 'AMapLocation', '2.12.2'"

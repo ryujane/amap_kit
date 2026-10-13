@@ -1,4 +1,3 @@
-
 import 'package:flutter/foundation.dart' show immutable;
 
 /// 表示以角度存储的一对纬度与经度坐标。

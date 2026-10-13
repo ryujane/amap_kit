@@ -637,19 +637,13 @@ class PlatformGroundOverlayUpdates {
 }
 
 class PlatformWeightedLatLng {
-  PlatformWeightedLatLng({
-    required this.point,
-    required this.weight,
-  });
+  PlatformWeightedLatLng({required this.point, required this.weight});
   PlatformLatLng point;
   double weight;
 }
 
 class PlatformHeatmapGradient {
-  PlatformHeatmapGradient({
-    required this.colors,
-    required this.startPoints,
-  });
+  PlatformHeatmapGradient({required this.colors, required this.startPoints});
 
   final List<int> colors;
   final List<double> startPoints;

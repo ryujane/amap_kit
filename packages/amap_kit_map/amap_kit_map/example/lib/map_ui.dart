@@ -378,9 +378,7 @@ class MapUiBodyState extends State<MapUiBody> {
               if (_locationPermissionError != null)
                 Text(
                   '权限请求异常：$_locationPermissionError',
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.error,
-                  ),
+                  style: TextStyle(color: Theme.of(context).colorScheme.error),
                 ),
               if (_myLocation != null)
                 Text(

@@ -21,7 +21,8 @@ workspace:
 dev_dependencies:
   flutter_lints: ^6.0.0
   melos: ^8.2.2
-  pigeon: ^27.3.0
+  pigeon: 27.3.0
+  yaml: ^3.1.3
 
 melos:
   repository: https://github.com/ryujane/amap_kit
@@ -30,8 +31,8 @@ melos:
     gen:pigeon:
       description: 重新生成所有 Pigeon 平台通道代码。
       run: |
-        melos run gen:pigeon:map
-        melos run gen:pigeon:location
+        dart run melos run gen:pigeon:map
+        dart run melos run gen:pigeon:location
     gen:pigeon:map:
       description: 重新生成地图 Android/iOS 的 Pigeon 代码。
       exec: dart run pigeon --input pigeons/map_messages.dart

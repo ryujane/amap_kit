@@ -139,29 +139,27 @@ void main() {
     expect(result.mapTaps, 0);
   }, skip: _apiKey.isEmpty);
 
-  testWidgets(
-    'polyline tap fires its callback and suppresses map tap',
-    (WidgetTester tester) async {
-      var tapped = false;
-      final _TapResult result = await _tapOverlayAtCenter(
-        tester,
-        overlay: Polyline(
-          polylineId: const PolylineId('tap-polyline'),
-          points: const <LatLng>[
-            LatLng(30.2736, 120.1546),
-            LatLng(30.2746, 120.1556),
-          ],
-          width: 14,
-        ),
-        onOverlayTap: () => tapped = true,
-      );
+  testWidgets('polyline tap fires its callback and suppresses map tap', (
+    WidgetTester tester,
+  ) async {
+    var tapped = false;
+    final _TapResult result = await _tapOverlayAtCenter(
+      tester,
+      overlay: Polyline(
+        polylineId: const PolylineId('tap-polyline'),
+        points: const <LatLng>[
+          LatLng(30.2736, 120.1546),
+          LatLng(30.2746, 120.1556),
+        ],
+        width: 14,
+      ),
+      onOverlayTap: () => tapped = true,
+    );
 
-      expect(tapped, isTrue);
-      expect(result.overlayTaps, 1);
-      expect(result.mapTaps, 0);
-    },
-    skip: _apiKey.isEmpty,
-  );
+    expect(tapped, isTrue);
+    expect(result.overlayTaps, 1);
+    expect(result.mapTaps, 0);
+  }, skip: _apiKey.isEmpty);
 }
 
 final class _TapResult {
