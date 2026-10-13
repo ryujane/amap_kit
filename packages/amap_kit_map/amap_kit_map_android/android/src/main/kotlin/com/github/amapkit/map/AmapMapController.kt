@@ -45,6 +45,10 @@ class AmapMapController(
     AMapOptionsSink, AmapMapListener, OnSaveInstanceStateListener, AMap.OnMyLocationChangeListener {
     private val mapView = MapView(context, options)
     private val map = mapView.map
+    private val myLocationStyleController = MyLocationStyleController<MyLocationStyle>(
+        { map.myLocationStyle = it },
+        { map.isMyLocationEnabled = it }
+    )
     private val flutterApi = MapsCallbackApi(binaryMessenger, id.toString())
     private val assetManager = context.assets
     @VisibleForTesting
@@ -110,6 +114,7 @@ class AmapMapController(
         map.setOnMapLongClickListener(null)
         map.setOnMyLocationChangeListener(null)
         map.isMyLocationEnabled = false
+        myLocationStyleController.clear()
         mapView.onDestroy()
         MapsApi.setUp(binaryMessenger, null, id.toString())
         lifecycle?.removeObserver(this)
@@ -300,7 +305,7 @@ class AmapMapController(
     }
 
     override fun setMyLocationStyle(myLocationStyle: MyLocationStyle?) {
-        myLocationStyle?.let { map.myLocationStyle = it }
+        myLocationStyleController.setStyle(myLocationStyle)
     }
 
     override fun setMyLocationEnabled(enabled: Boolean) {
@@ -315,7 +320,7 @@ class AmapMapController(
                 "Foreground location permission is required before enabling the location layer."
             )
         }
-        map.isMyLocationEnabled = enabled
+        myLocationStyleController.setEnabled(enabled)
         if (enabled) {
             map.setOnMyLocationChangeListener(this)
         } else {
