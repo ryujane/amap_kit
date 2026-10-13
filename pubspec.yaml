@@ -31,8 +31,8 @@ melos:
     gen:pigeon:
       description: 重新生成所有 Pigeon 平台通道代码。
       run: |
-        melos run gen:pigeon:map
-        melos run gen:pigeon:location
+        dart run melos run gen:pigeon:map
+        dart run melos run gen:pigeon:location
     gen:pigeon:map:
       description: 重新生成地图 Android/iOS 的 Pigeon 代码。
       exec: dart run pigeon --input pigeons/map_messages.dart
