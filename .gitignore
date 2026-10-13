@@ -47,3 +47,5 @@ GeneratedPluginRegistrant.*
 .claude
 
 pubspec.lock
+# Kotlin compiler session cache
+.kotlin/

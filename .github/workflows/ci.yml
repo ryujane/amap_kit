@@ -1,0 +1,99 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  FLUTTER_VERSION: '3.47.5'
+  PUB_ENVIRONMENT: github-actions
+
+jobs:
+  checks:
+    name: Dart checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+      - run: flutter pub get
+      - name: Check package boundaries and SDK declarations
+        run: dart run tool/ci/check_workspace.dart
+      - name: Check formatting (exclude Pigeon output)
+        run: git ls-files -z '*.dart' ':!:**/*.g.dart' | xargs -0 dart format --output=none --set-exit-if-changed
+      - run: flutter analyze --no-pub
+      - name: Test workspace packages
+        run: dart run tool/ci/test_workspace.dart
+      - name: Check Pigeon output freshness
+        run: |
+          dart run melos run gen:pigeon
+          git diff --exit-code
+          test -z "$(git ls-files --others --exclude-standard)"
+
+  android:
+    name: Android / ${{ matrix.product }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        product: [map, location]
+    defaults:
+      run:
+        working-directory: packages/amap_kit_${{ matrix.product }}/amap_kit_${{ matrix.product }}/example
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+          cache-dependency-path: '**/*.gradle.kts'
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+      - run: flutter pub get
+      # Flutter creates the ignored Gradle wrapper and local.properties.
+      - run: flutter build apk --debug --no-pub
+      - name: Native unit tests
+        run: bash android/gradlew -p android :amap_kit_${{ matrix.product }}_android:testDebugUnitTest
+
+  ios:
+    name: iOS / ${{ matrix.product }}
+    runs-on: macos-15
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        product: [map, location]
+    defaults:
+      run:
+        working-directory: packages/amap_kit_${{ matrix.product }}/amap_kit_${{ matrix.product }}/example
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+      - run: flutter pub get
+      # Build for a device without signing; vendor SDK simulator slices vary.
+      - run: flutter build ios --debug --no-codesign --no-pub

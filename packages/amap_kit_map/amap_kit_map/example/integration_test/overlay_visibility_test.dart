@@ -71,94 +71,90 @@ void main() {
   final IntegrationTestWidgetsFlutterBinding binding =
       IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets(
-    'iOS polyline, polygon, and circle render visible colors',
-    (WidgetTester tester) async {
-      final Completer<AmapMapController> created =
-          Completer<AmapMapController>();
-      final List<AmapMapException> errors = <AmapMapException>[];
-      await tester.pumpWidget(
-        Directionality(
-          textDirection: TextDirection.ltr,
-          child: SizedBox(
-            width: 400,
-            height: 800,
-            child: AmapMap(
-              apiKey: _apiKey,
-              privacyStatement: _privacyStatement,
-              mapId: _mapId,
-              initialCameraPosition: const CameraPosition(
-                target: LatLng(30.2741, 120.1551),
-                zoom: 15,
-              ),
-              polylines: <Polyline>{
-                Polyline(
-                  polylineId: const PolylineId('visibility-line'),
-                  points: const <LatLng>[
-                    LatLng(30.2736, 120.1546),
-                    LatLng(30.2746, 120.1556),
-                  ],
-                  color: Color(0xffff00ff),
-                  width: 10,
-                ),
-              },
-              polygons: <Polygon>{
-                Polygon(
-                  polygonId: const PolygonId('visibility-area'),
-                  points: const <LatLng>[
-                    LatLng(30.2731, 120.1541),
-                    LatLng(30.2741, 120.1541),
-                    LatLng(30.2741, 120.1551),
-                    LatLng(30.2731, 120.1551),
-                  ],
-                  strokeColor: Color(0xff00ffff),
-                  fillColor: Color(0xff00ffff),
-                  strokeWidth: 6,
-                ),
-              },
-              circles: <Circle>{
-                const Circle(
-                  circleId: CircleId('visibility-circle'),
-                  center: LatLng(30.2751, 120.1561),
-                  radius: 150,
-                  strokeColor: Color(0xffffff00),
-                  fillColor: Color(0xffffff00),
-                  strokeWidth: 6,
-                ),
-              },
-              onMapCreated: created.complete,
-              onError: errors.add,
+  testWidgets('iOS polyline, polygon, and circle render visible colors', (
+    WidgetTester tester,
+  ) async {
+    final Completer<AmapMapController> created = Completer<AmapMapController>();
+    final List<AmapMapException> errors = <AmapMapException>[];
+    await tester.pumpWidget(
+      Directionality(
+        textDirection: TextDirection.ltr,
+        child: SizedBox(
+          width: 400,
+          height: 800,
+          child: AmapMap(
+            apiKey: _apiKey,
+            privacyStatement: _privacyStatement,
+            mapId: _mapId,
+            initialCameraPosition: const CameraPosition(
+              target: LatLng(30.2741, 120.1551),
+              zoom: 15,
             ),
+            polylines: <Polyline>{
+              Polyline(
+                polylineId: const PolylineId('visibility-line'),
+                points: const <LatLng>[
+                  LatLng(30.2736, 120.1546),
+                  LatLng(30.2746, 120.1556),
+                ],
+                color: Color(0xffff00ff),
+                width: 10,
+              ),
+            },
+            polygons: <Polygon>{
+              Polygon(
+                polygonId: const PolygonId('visibility-area'),
+                points: const <LatLng>[
+                  LatLng(30.2731, 120.1541),
+                  LatLng(30.2741, 120.1541),
+                  LatLng(30.2741, 120.1551),
+                  LatLng(30.2731, 120.1551),
+                ],
+                strokeColor: Color(0xff00ffff),
+                fillColor: Color(0xff00ffff),
+                strokeWidth: 6,
+              ),
+            },
+            circles: <Circle>{
+              const Circle(
+                circleId: CircleId('visibility-circle'),
+                center: LatLng(30.2751, 120.1561),
+                radius: 150,
+                strokeColor: Color(0xffffff00),
+                fillColor: Color(0xffffff00),
+                strokeWidth: 6,
+              ),
+            },
+            onMapCreated: created.complete,
+            onError: errors.add,
           ),
         ),
-      );
+      ),
+    );
 
-      await _pumpUntil(
-        tester,
-        () => errors.isNotEmpty || created.isCompleted,
-        description: 'native map controller',
-      );
-      expect(errors, isEmpty);
-      await Future<void>.delayed(const Duration(seconds: 4));
-      await tester.pump();
+    await _pumpUntil(
+      tester,
+      () => errors.isNotEmpty || created.isCompleted,
+      description: 'native map controller',
+    );
+    expect(errors, isEmpty);
+    await Future<void>.delayed(const Duration(seconds: 4));
+    await tester.pump();
 
-      final List<int> screenshot = await binding.takeScreenshot(
-        'overlay-visibility',
-      );
-      final ui.Image image = await _decodePng(screenshot);
-      addTearDown(image.dispose);
+    final List<int> screenshot = await binding.takeScreenshot(
+      'overlay-visibility',
+    );
+    final ui.Image image = await _decodePng(screenshot);
+    addTearDown(image.dispose);
 
-      final int magenta = await _countNearColor(image, 0xffff00ff);
-      final int cyan = await _countNearColor(image, 0xff00ffff);
-      final int yellow = await _countNearColor(image, 0xffffff00);
+    final int magenta = await _countNearColor(image, 0xffff00ff);
+    final int cyan = await _countNearColor(image, 0xff00ffff);
+    final int yellow = await _countNearColor(image, 0xffffff00);
 
-      expect(
-        magenta > 200 && cyan > 500 && yellow > 500,
-        isTrue,
-        reason:
-            'overlay pixel counts magenta=$magenta cyan=$cyan yellow=$yellow',
-      );
-    },
-    skip: _apiKey.isEmpty,
-  );
+    expect(
+      magenta > 200 && cyan > 500 && yellow > 500,
+      isTrue,
+      reason: 'overlay pixel counts magenta=$magenta cyan=$cyan yellow=$yellow',
+    );
+  }, skip: _apiKey.isEmpty);
 }
