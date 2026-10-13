@@ -1,3 +1,7 @@
+## 0.1.3
+
+ - **FIX**(map): restore Android location style after re-enabling layer ([#7](https://github.com/ryujane/amap_kit/issues/7)).
+
 ## 0.1.2
 
  - **FIX**(map): route single cluster item taps to Marker.onTap on Android ([#5](https://github.com/ryujane/amap_kit/issues/5)).

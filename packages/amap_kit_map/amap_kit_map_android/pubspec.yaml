@@ -1,6 +1,6 @@
 name: amap_kit_map_android
 description: Android implementation for amap_kit_map.
-version: 0.1.2
+version: 0.1.3
 repository: https://github.com/ryujane/amap_kit
 
 environment:

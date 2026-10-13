@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2026-10-13
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`amap_kit_map_android` - `v0.1.3`](#amap_kit_map_android---v013)
+ - [`amap_kit_map` - `v0.1.2`](#amap_kit_map---v012)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `amap_kit_map` - `v0.1.2`
+
+---
+
+#### `amap_kit_map_android` - `v0.1.3`
+
+ - **FIX**(map): restore Android location style after re-enabling layer ([#7](https://github.com/ryujane/amap_kit/issues/7)).
+
+
 ## 2026-09-24
 
 ### Changes
